@@ -1,4 +1,4 @@
-package com.sungjun.jpa;
+package com.sungjun.jpa.test1;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -54,7 +54,6 @@ public class Account {
 
     // convenient method
     public void addStudy(Study study) {
-
         // 한 묶음으로 사용. account.getStudies().add(study); 만 하면 DB에 반영되지 않음.
         // study.setOwner(account);만 해도되지만 객체지향적으로 생각했을때 (서로의 레퍼런스를 가지고 있어야함) 두개를 같이 설정
         this.getStudies().add(study);
@@ -63,7 +62,6 @@ public class Account {
     }
 
     public void removeStudy(Study study) {
-
         this.getStudies().remove(study);
         study.setOwner(null);
     }
