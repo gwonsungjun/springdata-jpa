@@ -22,7 +22,7 @@ public class JpaRunner  implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Account account = new Account();
+  /*      Account account = new Account();
         account.setUsername("gwonsungjun");
         account.setPassword("jpa");
 
@@ -55,6 +55,16 @@ public class JpaRunner  implements ApplicationRunner {
         post.addComment(comment1);
 
         Session session1 = entityManager.unwrap(Session.class);
-        session1.save(post);
+        session1.save(post);*/
+
+        Session session2 = entityManager.unwrap(Session.class);
+/*        Post post = session2.get(Post.class, 1L);
+        System.out.println("================");
+        System.out.println(post.getTitle());*/
+
+        Comment comment = session2.get(Comment.class, 2L);
+        System.out.println("============");
+        System.out.println(comment.getComment());
+        System.out.println(comment.getPost().getTitle());
     }
 }
