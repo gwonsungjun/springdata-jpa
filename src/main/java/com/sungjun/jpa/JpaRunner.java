@@ -4,7 +4,9 @@ import com.sungjun.jpa.test1.Account;
 import com.sungjun.jpa.test1.Study;
 import com.sungjun.jpa.test2.Comment;
 import com.sungjun.jpa.test2.Post;
+import com.sungjun.jpa.test2.PostRepository;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -17,8 +19,11 @@ import javax.persistence.PersistenceContext;
 @Transactional
 public class JpaRunner  implements ApplicationRunner {
 
-    @PersistenceContext
-    EntityManager entityManager; // JPA 가장 핵심적인 API ( hibernate에서는 Session이 가장 핵심적인 API )
+  /*  @PersistenceContext
+    EntityManager entityManager; // JPA 가장 핵심적인 API ( hibernate에서는 Session이 가장 핵심적인 API )*/
+
+  @Autowired
+    PostRepository postRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -57,14 +62,16 @@ public class JpaRunner  implements ApplicationRunner {
         Session session1 = entityManager.unwrap(Session.class);
         session1.save(post);*/
 
-        Session session2 = entityManager.unwrap(Session.class);
-/*        Post post = session2.get(Post.class, 1L);
+/*        Session session2 = entityManager.unwrap(Session.class);
+*//*        Post post = session2.get(Post.class, 1L);
         System.out.println("================");
-        System.out.println(post.getTitle());*/
+        System.out.println(post.getTitle());*//*
 
         Comment comment = session2.get(Comment.class, 2L);
         System.out.println("============");
         System.out.println(comment.getComment());
-        System.out.println(comment.getPost().getTitle());
+        System.out.println(comment.getPost().getTitle());*/
+
+        postRepository.findAll().forEach(System.out::println);
     }
 }
