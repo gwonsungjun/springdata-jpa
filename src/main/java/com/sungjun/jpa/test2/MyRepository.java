@@ -16,6 +16,6 @@ public interface MyRepository<T, Id extends Serializable> extends Repository<T, 
 
     List<T> findAll();
 
-    @Nullable
-    <E extends  T> Optional<E> fidById(Id id); // 메소드에 적용하면 메소드의 리턴값에 적용됨
+  /*  @Nullable
+    <E extends  T> Optional<E> fidById(Id id); // 메소드에 적용하면 메소드의 리턴값에 적용됨*/
 }
