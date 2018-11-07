@@ -4,9 +4,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,8 +26,9 @@ public class CommentRepositoryTest {
         comment.setLikeCount(100);
         commentRepository.save(comment);
 
-        List<Comment> comments = commentRepository.findByCommentContainsIgnoreCaseAndLikeCountGreaterThan("Spring", 10);
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "LikeCount"));
 
-        assertThat(comments.size()).isEqualTo(1);
+        Page<Comment> comments = commentRepository.findByCommentContainsIgnoreCase("Spring", pageRequest);
+        assertThat(comments.getNumberOfElements()).isEqualTo(2);
     }
 }
